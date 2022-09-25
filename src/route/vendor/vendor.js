@@ -43,8 +43,7 @@ exports.productBySKU = async (vendorId, sku) => {
 
 exports.insertProduct = async (product) => {
   try {
-    await query('INSERT INTO product SET ?', product)
-    return true
+    return await query('INSERT INTO product SET ?', product)
   } catch (error) {
     return false
   }

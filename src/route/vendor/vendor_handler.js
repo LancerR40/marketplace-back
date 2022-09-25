@@ -41,7 +41,11 @@ router.post('/products', checkAuth, addProductValidation(), validate, async (req
     return res.status(responseCodes.HTTP_200_OK).json(errorResponse('Ocurrió un error al registrar el producto. Por favor, intenta más tarde', 'name')) 
   }
 
-  res.status(responseCodes.HTTP_200_OK).json(successResponse({ message: 'Producto registrado con éxito' }))
+  delete data.idvendor
+  data.productId = result.insertId
+  data.createdAt = new Date().toDateString()
+
+  res.status(responseCodes.HTTP_200_OK).json(successResponse({ message: 'Producto registrado con éxito', product: data }))
 })
 
 router.get('/products', checkAuth, async (req, res) => {
