@@ -28,11 +28,11 @@ router.get('/data', checkAuth, async (req, res) => {
   
   if (role === 'vendor') {
     const { name } = await vendorById(id)
-    return res.status(responseCodes.HTTP_200_OK).json(successResponse({ vendorName: name }))
+    return res.status(responseCodes.HTTP_200_OK).json(successResponse({ username: name }))
   }
 
   const { name } = await adminById(id)
-  res.status(responseCodes.HTTP_200_OK).json(successResponse({ adminName: name }))
+  res.status(responseCodes.HTTP_200_OK).json(successResponse({ username: name }))
 })
 
 router.post('/vendor/login', vendorLoginValidation(), validate, async (req, res) => {
