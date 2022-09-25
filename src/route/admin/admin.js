@@ -25,7 +25,8 @@ exports.getVendors = async () => {
 
 exports.productsByVendorsIds = async (ids) => {
   try {
-    return await query(`SELECT p.IDProduct as productId, p.Name as productName, p.SKU as sku, p.Quantity as quantity, p.Price as price, v.Name as vendorName FROM product as p INNER JOIN vendor as v ON p.IDVendor = v.IDVendor WHERE v.IDVendor IN (${ids.toString()})`)
+    const statement = !ids.length ? '' : `WHERE v.IDVendor IN (${ids.toString()})`
+    return await query(`SELECT p.IDProduct as productId, p.Name as productName, p.SKU as sku, p.Quantity as quantity, p.Price as price, v.Name as vendorName FROM product as p INNER JOIN vendor as v ON p.IDVendor = v.IDVendor ${statement}`)
   } catch (error) {
     return false
   }
