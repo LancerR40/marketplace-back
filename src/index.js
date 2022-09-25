@@ -5,6 +5,7 @@ const config = require('./config')
 const authRoute   = require('./route/auth/auth_handler')
 const adminRoute  = require('./route/admin/admin_handler')
 const vendorRoute = require('./route/vendor/vendor_handler')
+const buyerRoute  = require('./route/buyer/buyer_handler')
 
 const app = express()
 
@@ -14,6 +15,7 @@ app.use(express.json())
 /* routes */
 app.use('/api/v1/auth', authRoute)
 app.use('/api/v1/admin', adminRoute)
+app.use('/api/v1/buyer', buyerRoute)
 app.use('/api/v1/vendor', vendorRoute)
 
 app.listen(config.PORT, () => console.log('Server on port: ' + config.PORT))
