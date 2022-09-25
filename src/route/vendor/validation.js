@@ -13,6 +13,15 @@ exports.validate = (req, res, next) => {
 };
 
 exports.vendorSignupValidation = () => [
+  body('name')
+    .notEmpty()
+    .withMessage('El campo de nombre es requerido')
+    .bail()
+
+    .isLength({ max: 55 })
+    .withMessage('El campo de nombre puede poseer un máximo de cincuenta y cinco (55) caracteres')
+    .bail(),
+
   body('email')
     .notEmpty()
     .withMessage('El campo de correo es requerido')

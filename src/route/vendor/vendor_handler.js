@@ -1,12 +1,12 @@
 const express = require('express')
 const router  = express.Router()
 const bcrypt = require('bcrypt')
-const { vendorByEmail, productBySKU, productsByVendor, insertVendor, insertProduct, checkAuth } = require('./vendor')
+const { vendorByEmail, productBySKU, productsByVendor, insertVendor, insertProduct, checkAuth, vendors } = require('./vendor')
 const { validate, vendorSignupValidation, addProductValidation } = require('./validation')
 const { errorResponse, responseCodes, successResponse } = require('../../response')
 
 router.post('/signup', vendorSignupValidation(), validate, async (req, res) => {
-  const { email, password } = req.body
+  const { name, email, password } = req.body
   const vendor = await vendorByEmail(email)
 
   if (vendor) {
@@ -14,7 +14,7 @@ router.post('/signup', vendorSignupValidation(), validate, async (req, res) => {
   }
 
   const hash = await bcrypt.hash(password, 8)
-  const data = { email, password: hash }
+  const data = { name, email, password: hash }
 
   const result = insertVendor(data)
 

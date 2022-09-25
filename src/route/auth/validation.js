@@ -33,3 +33,25 @@ exports.vendorLoginValidation = () => [
     .withMessage('El campo de contraseña debe poseer un rango de caracteres desde seis (6) a docientos cincuenta y cinco caracteres (255)')
     .bail()
 ]
+
+exports.adminLoginValidation = () => [
+  body('email')
+    .notEmpty()
+    .withMessage('El campo de correo es requerido')
+    .bail()
+
+    .isEmail()
+    .withMessage('El correo ingresado es inválido')
+    .bail()
+    
+  .normalizeEmail(),
+
+  body('password')
+    .notEmpty()
+    .withMessage('El campo de contraseña es requerido')
+    .bail()
+
+    .isLength({ min: 6, max: 255 })
+    .withMessage('El campo de contraseña debe poseer un rango de caracteres desde seis (6) a docientos cincuenta y cinco caracteres (255)')
+    .bail()
+]
