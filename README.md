@@ -1,5 +1,5 @@
 # marketplace-back
-Marketplace back-end build with Node JS using Express JS framework
+Marketplace Back-End App build with Node JS using Express JS framework
 
 ## Requirements
 You must have:
